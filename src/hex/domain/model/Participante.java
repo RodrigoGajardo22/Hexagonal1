@@ -1,12 +1,14 @@
 package hex.domain.model;
 
+import hex.domain.portsin.DomainException;
+
 public class Participante {
 
 	private String telefono;
 	private String nombre;
 	private String region;
 
-	public Participante(String nombreYApellido, String telefono, String region) throws ErrorDeDatos {
+	public Participante(String nombreYApellido, String telefono, String region) throws DomainException {
 
 		this.nombre   = nombreYApellido;
 		this.telefono = telefono;
@@ -16,20 +18,20 @@ public class Participante {
 
 	}
 
-	private void validarDatos(String nombre, String tel, String region) throws ErrorDeDatos {
+	private void validarDatos(String nombre, String tel, String region) throws DomainException {
 		if (nombre.equals("")) {
-			throw new ErrorDeDatos("Cargue su nombre");
+			throw new DomainException("Cargue su nombre");
 		}
 		if (telefono.equals("")) {
-			throw new ErrorDeDatos("Debe cargar un telefono");
+			throw new DomainException("Debe cargar un telefono");
 
 		}
 		if (!validarTelefono(telefono)) {
-			throw new ErrorDeDatos("El teléfono debe ingresarse de la siguiente forma: NNNN-NNNNNN");
+			throw new DomainException("El teléfono debe ingresarse de la siguiente forma: NNNN-NNNNNN");
 
 		}
 		if (!region.equals("China") && !region.equals("US") && !region.equals("Europa")) {
-			throw new ErrorDeDatos("Region desconocida. Las conocidas son: China, US, Europa");
+			throw new DomainException("Region desconocida. Las conocidas son: China, US, Europa");
 
 		}
 	}

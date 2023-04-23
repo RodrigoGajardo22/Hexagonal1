@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import hex.domain.portsout.RepositorioException;
 import hex.domain.portsout.RepositorioParticipantes;
 
 public class JdbcParticipantes implements RepositorioParticipantes {
@@ -32,7 +33,7 @@ public class JdbcParticipantes implements RepositorioParticipantes {
 				conn.close();
 				conn = null;
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw new RepositorioException(e, "Error con la Base de datos");
 			}
 		}
 	}
@@ -56,7 +57,7 @@ public class JdbcParticipantes implements RepositorioParticipantes {
 			statement.executeUpdate(); //
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new RepositorioException("Error al intentar conectarse con la BD.");
 		} finally {
 			this.disconnect();
 		}

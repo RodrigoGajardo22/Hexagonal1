@@ -8,11 +8,12 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import hex.domain.model.ErrorDeDatos;
+import hex.domain.portsin.DomainException;
 import hex.domain.portsin.Usuarios;
 
 public class UI extends JFrame {
@@ -54,8 +55,8 @@ public class UI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					onBotonCargar();
-				} catch (ErrorDeDatos e1) {
-					e1.printStackTrace();
+				} catch (DomainException e1) {
+					JOptionPane.showMessageDialog(contentPane, "Error en la carga.");
 				}
 			}
 		});
@@ -67,7 +68,7 @@ public class UI extends JFrame {
 		setVisible(true);
 	}
 
-	private void onBotonCargar() throws ErrorDeDatos {
+	private void onBotonCargar() throws DomainException {
 
 //		Participante participante = new Participante(nombre.getText(), telefono.getText(), region.getText());
 //
